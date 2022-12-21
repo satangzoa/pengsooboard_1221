@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>질문하기</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+     <div class="container-fluid">
+       <a class="navbar-brand" href="/index">질문-답변 공개게시판</a>       
+       <div class="collapse navbar-collapse">
+       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+             <a class="nav-link" href="@{/login}">로그인</a>
+          </li>
+          <li class="nav-item">
+             <a class="nav-link" th:href="@{/join}">회원가입</a>
+          </li>
+       </ul>
+       </div>
+     </div>
+    </nav> 
+   <div class="container my-3">
+   		<div style="text-align: center">
+			<h5 class="my-3 border-bottom pb-2">질문하기</h5>
+		</div>
+   		<form th:action="@{/questionCreate}" method="post" th:object="${questionForm}">
+   			<div>
+   				<div class="alert alert-danger" ><!-- field안에 에러가 생기면 경고글이 뜬다 -->
+   					<div th:each="err:${#fields.allErrors()}" th:text="${err}"></div>
+   				</div>
+   			</div>
+   		
+   		<div class="mb-3">
+			  <label for="exampleFormControlInput1" class="form-label">제목</label>
+			  <input type="text" class="form-control" name="subject" id="exampleFormControlInput1" th:field="*{subject}"><!-- th:field="*{subject}"에러 발생해도 글자 남게 한다 -->
+		</div>
+		<div class="my-3">
+			  <label for="exampleFormControlTextarea1" class="form-label">질문내용</label>
+			  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"  name="content" th:field="*{content}"></textarea>
+		
+		</div>
+		<input type="submit" value="저장" class="btn btn-primary" >
+		
+			<input type="text" value="취소" class="btn btn-primary" th:onclick="|location.href='@{/list}'|" style="width:60px">
+
+	<!-- 
+   			<div>
+   				<label>제목</label>
+   				
+   				<input type="text" name="subject">
+   			</div>
+   			<div>
+   				<label>질문내용</label>
+   				<textarea rows="10" name="content"></textarea>
+   			</div>
+   		 -->	
+   		</form>
+   </div>
+</body>
+</html>

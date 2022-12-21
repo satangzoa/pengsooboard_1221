@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>회원 가입</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+     <div class="container-fluid">
+       <a class="navbar-brand" href="/index">질문-답변 공개게시판</a>       
+       <div class="collapse navbar-collapse">
+       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+             <a class="nav-link" th:href="@{/login}">로그인</a>
+          </li>
+          <li class="nav-item">
+             <a class="nav-link" th:href="@{/join}">회원가입</a>
+          </li>
+       </ul>
+       </div>
+     </div>
+    </nav> 
+	
+	<form th:action="@{/joinOk}">
+		<div>
+			<div class="container my-3">
+   		<div style="text-align: center">
+			<h5 class="my-3 border-bottom pb-2">회원가입</h5>
+		</div>
+   		<form th:action="@{/joinOk}" method="post" th:object="${memberForm}">
+   			<div>
+   				<div class="alert alert-danger" >
+   					<div th:each="err:${#fields.allErrors()}" th:text="${err}"></div>
+   				</div>
+   			</div>
+   		 <div class="container">
+		<h5 class="my-3 border-bottom pb-2">회원 가입</h5>
+		<form th:action="@{/joinOk}" method="post" th:object="${memberForm}">
+			<div>
+				<div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
+					<div th:each="err:${#fields.allErrors()}" th:text="${err}"></div>
+				</div>
+			</div>		
+			<div>
+				<label class="form-label">사용자ID</label>
+				<input type="text" name="username" class="form-control" th:field="*{username}">
+			</div>
+			<div>
+				<label class="form-label">비밀번호</label>
+				<input type="password" name="password" class="form-control" th:field="*{password}"></textarea>
+			</div>
+			<div>
+				<label class="form-label">이메일</label>
+				<input type="text" name="email" class="form-control" th:field="*{email}">
+			</div>
+			<input type="submit" value="회원가입" class="btn btn-primary my-2">
+			<input type="text" value="취소" class="btn btn-primary" th:onclick="|location.href='@{/list}'|" style="width:60px">
+		</form>	
+	</div>	
+   	<!--  	<div class="mb-3">
+			  <label for="exampleFormControlInput1" class="form-label">사용자ID</label>
+			  <input type="text" class="form-control" name="username" id="exampleFormControlInput1" th:field="*{username}">
+		</div>
+		<div class="mb-3">
+			  <label for="exampleFormControlInput1" class="form-label">이메일</label>
+			  <input type="password" class="form-control" name="password" id="exampleFormControlInput1" th:field="*{password}">
+		</div>
+		</div>
+		<div class="mb-3">
+			  <label for="exampleFormControlInput1" class="form-label">이메일</label>
+			  <input type="text" class="form-control" name="email" id="exampleFormControlInput1" th:field="*{email}">
+		</div>
+		<input type="submit" value="저장" class="btn btn-primary" >
+		<input type="text" value="취소" class="btn btn-primary" th:onclick="|location.href='@{/list}'|" style="width:60px">
+		</div>
+	-->
+	
+	</form>
+	
+</body>
+</html>
